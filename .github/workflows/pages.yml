@@ -2,7 +2,7 @@ name: Publish pet board
 on:
   push:
     branches: [main]
-    paths: [board-host-test-public.zip, board-v12-public.zip, astrobox-background.png, astrobox-background-v2.png, .github/workflows/pages.yml]
+    paths: [intro-card-public.zip, board-host-test-public.zip, board-v12-public.zip, astrobox-background.png, astrobox-background-v2.png, .github/workflows/pages.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +24,8 @@ jobs:
           test ! -e _site/board-host-test
           cp -R _test_staging/board-host-test _site/board-host-test
           cp astrobox-background.png astrobox-background-v2.png _site/
+          test ! -e _site/intro-card-v1
+          unzip -q intro-card-public.zip -d _site
       - uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: _site
